@@ -26,8 +26,12 @@ func healthhandler(w http.ResponseWriter, r *http.Request) {
 	w.Write(jsonResponse)
 }
 func main() {
-	http.HandleFunc("/health", healthhandler)
-	http.HandleFunc("/createproduct", handlers.CreateProductHandler)
+	http.HandleFunc("GET /health", healthhandler)
+	http.HandleFunc("POST /products", handlers.CreateProductHandler)
+	http.HandleFunc("GET /products", handlers.GetProductsHandler)
+	http.HandleFunc("GET /product/{id}", handlers.GetProductByIDHandler)
+	http.HandleFunc("PUT /products/{id}", handlers.UpdateProductHandler)
+	// http.HandleFunc("DELETE /products", handlers.DeleteProductHandler)
 	err := http.ListenAndServe(":8080", nil)
 	if err != nil {
 		panic(err)
