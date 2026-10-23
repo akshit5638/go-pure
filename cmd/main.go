@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"net/http"
+	"pure-go/internal/handlers"
 )
 
 type healthResponse struct {
@@ -26,6 +27,7 @@ func healthhandler(w http.ResponseWriter, r *http.Request) {
 }
 func main() {
 	http.HandleFunc("/health", healthhandler)
+	http.HandleFunc("/createproduct", handlers.CreateProductHandler)
 	err := http.ListenAndServe(":8080", nil)
 	if err != nil {
 		panic(err)
